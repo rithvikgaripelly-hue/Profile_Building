@@ -1,0 +1,21 @@
+{% extends 'portal_app/base.html' %}
+{% load static %}
+{% block title %}Bulk Upload Students{% endblock %}
+{% block content %}
+<h2>Bulk Upload Students (CSV/XLSX)</h2>
+<p>Required columns: <code>student_id,name,department,year,email,phone</code></p>
+<p>
+  <strong>Upload a CSV file with the above columns. Example:</strong><br>
+  <pre>
+student_id,name,department,year,email,phone
+1001,John Doe,CSE,first,john@example.com,1234567890
+1002,Jane Smith,EEE,second,jane@example.com,9876543210
+  </pre>
+</p>
+<a href="{% static 'portal_app/sample_students.csv' %}" download>Download Sample CSV</a>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+{% endblock %}
